@@ -31,17 +31,17 @@
             <h2>🎯 Budget Settings</h2>
             <form id="budget-form" class="settings-form">
                 <div class="form-group">
-                    <label for="budget-cap">Monthly Budget Cap ($) *</label>
+                    <label for="budget-cap"> Budget Cap ($) *</label>
                     <input 
                         type="text" 
                         id="budget-cap" 
                         name="budgetCap" 
-                        placeholder="e.g., 500.00"
-                        value="500.00"
+                        placeholder="e.g., 100.00"
+                        value="100.00"
                         aria-describedby="budget-cap-help"
                     >
                     <small id="budget-cap-help" class="help-text">
-                        Set your maximum monthly spending limit. You'll get alerts when you're close.
+                        Set your maximum weekly spending limit. You'll get alerts when you're close.
                     </small>
                     <span id="budget-cap-error" class="error-message" role="alert"></span>
                 </div>
@@ -60,7 +60,7 @@
 
             <form id="currency-form" class="settings-form">
                 <div class="currency-list">
-                    <!-- USD (Base Currency) -->
+                    <!-- USD -->
                     <div class="currency-item">
                         <div class="currency-info">
                             <strong>USD (Base Currency)</strong>
@@ -91,10 +91,9 @@
                         </div>
                     </div>
 
-                    <!-- RWF (Rwandan Franc) -->
+                    <!-- RWF (Rwandan Francs) -->
                     <div class="currency-item">
                         <div class="currency-info">
-                            <strong>RWF</strong>
                             <p>Rwandan Franc</p>
                         </div>
                         <div class="currency-rate">
@@ -104,8 +103,8 @@
                                 id="rwf-rate" 
                                 name="rwfRate" 
                                 class="rate-input"
-                                placeholder="1300"
-                                value="1300"
+                                placeholder="1350"
+                                value="1350"
                             >
                             <span class="rate-label">RWF per 1 USD</span>
                         </div>
@@ -131,7 +130,7 @@
                     </button>
                 </div>
 
-                <!-- Import Data -->
+                <!-- Import the Data -->
                 <div class="data-card">
                     <h3>📥 Import Data</h3>
                     <p>Upload a JSON file to restore your transactions.</p>
@@ -151,7 +150,7 @@
                 <!-- Clear All Data -->
                 <div class="data-card danger-card">
                     <h3>🗑️ Clear All Data</h3>
-                    <p><strong>Warning:</strong> This will permanently delete all your transactions!</p>
+                    <p><strong>Warning:</strong> All your transactions will be permanently deleted!</p>
                     <button class="btn btn-danger" id="clear-data-btn">
                         Clear All Data
                     </button>
@@ -160,12 +159,12 @@
         </section>
     </main>
 
-    <!-- Confirmation Modal for Clear Data -->
+    <!--  Clear Data -->
     <div id="clear-modal" class="modal" role="dialog" aria-labelledby="clear-modal-title" aria-modal="true" style="display: none;">
         <div class="modal-content">
-            <h3 id="clear-modal-title">⚠️ Confirm Clear All Data</h3>
-            <p>Are you absolutely sure you want to delete <strong>ALL</strong> your transactions?</p>
-            <p><strong>This action cannot be undone!</strong></p>
+            <h3 id="clear-modal-title">⚠️ Confirm Clear All the Data</h3>
+            <p>Are you sure you want to delete <strong>ALL</strong> your transactions?</p>
+            <p><strong>This action can not be undone!</strong></p>
             <div class="modal-actions">
                 <button class="btn btn-danger" id="confirm-clear">Yes, Delete Everything</button>
                 <button class="btn btn-secondary" id="cancel-clear">Cancel</button>
