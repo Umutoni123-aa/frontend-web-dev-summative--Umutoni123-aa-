@@ -1,6 +1,5 @@
 /**
  * ui.js - Controls everything you see and interact with!
- * This is the "artist" that paints the screen 🎨
  */
 
 import { 
