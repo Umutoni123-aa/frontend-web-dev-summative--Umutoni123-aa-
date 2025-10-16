@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header with navigation -->
+    <header>
+        <h1>💰 Student Finance Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="settings.html">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content area -->
+    <main id="main-content">
+        <section>
+            <h2>📊 Financial Overview</h2>
+            
+            <!-- Stats Cards Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Total Transactions</p>
+                        <p class="stat-value" id="total-transactions">0</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">💵</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Total Spent</p>
+                        <p class="stat-value" id="total-spent">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Top Category</p>
+                        <p class="stat-value" id="top-category">None</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-info">
+                        <p class="stat-label">Last 7 Days</p>
+                        <p class="stat-value" id="last-seven-days">$0.00</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Budget Section -->
+        <section>
+            <h2>🎯 Budget Tracker</h2>
+            <div class="budget-container">
+                <div class="budget-header">
+                    <div>
+                        <p class="budget-label">Monthly Budget Cap</p>
+                        <p class="budget-amount" id="budget-cap">$500.00</p>
+                    </div>
+                    <div>
+                        <p class="budget-label">Remaining</p>
+                        <p class="budget-remaining" id="budget-remaining">$500.00</p>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="budget-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <span class="progress-text">0%</span>
+                    </div>
+                </div>
+                
+                <!-- Live Alert Region for Budget Status -->
+                <div id="budget-alert" class="budget-alert" role="status" aria-live="polite" aria-atomic="true">
+                    <p>You're doing great! Keep tracking your expenses.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Breakdown -->
+        <section>
+            <h2>📈 Spending by Category</h2>
+            <div id="category-breakdown" class="category-list">
+                <p class="empty-state">No transactions yet. Start adding some!</p>
+            </div>
+        </section>
+
+        <!-- Recent Transactions Preview -->
+        <section>
+            <h2>🕒 Recent Transactions</h2>
+            <div id="recent-transactions" class="recent-list">
+                <p class="empty-state">No recent transactions to display.</p>
+            </div>
+            <div class="section-footer">
+                <a href="transactions.html" class="btn btn-secondary">View All Transactions</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Student Finance Tracker. Built by Umutoni Nada</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="scripts/state.js"></script>
+    <script type="module" src="scripts/storage.js"></script>
+    <script type="module" src="scripts/ui.js"></script>
+</body>
+</html>
