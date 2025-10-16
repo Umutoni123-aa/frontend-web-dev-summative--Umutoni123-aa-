@@ -4,7 +4,7 @@ Student Finance Tracker
 The Student Finance Tracker. A simple web application designed for students in need of a straightforward tool to manage their finances effectively. Whether you're tracking daily expenses, managing your budget, or analyzing your spending, this tool makes it easy to find what you need and take control of your financial life.
 
 ![alt text](wireframes.png)
-yt demo: 
+yt demo:  https://youtu.be/8PtMASBmSHU
 ## Features presented
 
 ### 1. **Pages/Sections**
