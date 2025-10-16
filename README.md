@@ -89,6 +89,8 @@ student-finance-tracker/
 
 Acknowledgments
 Built with vanilla JavaScript, HTML5, and CSS3
+learning/reference source.
+I used W3Schools tutorials to understand more about responsive CSS techniques, such as media queries and flexible grids
 
 Contact Information
 Developer: Umutoni Nada
