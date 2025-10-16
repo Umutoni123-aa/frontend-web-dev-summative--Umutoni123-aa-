@@ -12,7 +12,7 @@ const STORAGE_KEYS = {
 
 /**
  * Load transactions from localStorage
- * Returns an array of transactions, or empty array if none exist
+ * Returns empty array if none exist
  */
 export function loadTransactions() {
     try {
@@ -53,21 +53,21 @@ export function loadSettings() {
         }
         // Default settings
         return {
-            budgetCap: 500.00,
+            budgetCap: 100.00,
             currencies: {
                 USD: 1.00,
                 EUR: 0.85,
-                RWF: 1300
+                RWF: 1350
             }
         };
     } catch (error) {
         console.error('Error loading settings:', error);
         return {
-            budgetCap: 500.00,
+            budgetCap: 100.00,
             currencies: {
                 USD: 1.00,
                 EUR: 0.85,
-                RWF: 1300
+                RWF: 1350
             }
         };
     }
