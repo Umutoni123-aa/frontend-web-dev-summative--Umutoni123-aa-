@@ -6,9 +6,6 @@
 /**
  * Safely compile a regex pattern
  * Returns null if the pattern is invalid
- * @param {string} pattern - The regex pattern to compile
- * @param {boolean} caseSensitive - Whether search is case-sensitive
- * @returns {RegExp|null} Compiled regex or null if invalid
  */
 export function compileRegex(pattern, caseSensitive = false) {
     // If pattern is empty, return null
@@ -115,38 +112,33 @@ export function getSearchExamples() {
     return [
         {
             pattern: 'coffee',
-            description: 'Find any transaction containing "coffee"',
-            example: 'Matches: "Coffee with friends", "coffee beans"'
-        },
-        {
-            pattern: 'coffee|tea',
-            description: 'Find transactions with "coffee" OR "tea"',
-            example: 'Matches: "Coffee break", "Green tea"'
+            description: 'Find any transaction containing "Transport"',
+            example: 'Matches: "Taxi", "Taxi move"'
         },
         {
             pattern: '\\.\\.d{2}\\b',
             description: 'Find amounts with cents (has decimal point)',
-            example: 'Matches: "12.50", "8.75" but not "45"'
+            example: 'Matches: "10.50", "9.45" but not "40"'
         },
         {
             pattern: '^\\d+$',
             description: 'Find whole number amounts (no cents)',
-            example: 'Matches: "12", "45" but not "12.50"'
+            example: 'Matches: "10", "12" but not "10.50"'
         },
         {
             pattern: '^[A-Z]',
             description: 'Find descriptions starting with uppercase letter',
-            example: 'Matches: "Lunch", "Books" but not "lunch"'
+            example: 'Matches: "Breakfast", "Books" but not "breakfast"'
         },
         {
             pattern: '2025-09',
-            description: 'Find all transactions from September 2025',
-            example: 'Matches any date like "2025-09-29"'
+            description: 'Find all transactions from November 2025',
+            example: 'Matches any date like "2025-11-29"'
         },
         {
             pattern: '(Food|Books)',
-            description: 'Find Food or Books categories',
-            example: 'Matches category "Food" or "Books"'
+            description: 'Find Food or Transport categories',
+            example: 'Matches category "Food" or "Transport"'
         }
     ];
 }
