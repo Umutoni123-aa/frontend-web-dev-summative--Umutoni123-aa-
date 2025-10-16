@@ -1,19 +1,18 @@
 /**
  * validators.js - Validates user input using Regular Expressions (Regex)
- * Regex is like a pattern-matching superpower! 🦸‍♀️
  */
 
 /**
- * REGEX PATTERNS - These are the rules for checking if input is correct
+ * REGEX PATTERNS - Rules for checking if input is correct
  */
 
 // 1. Description: No leading/trailing spaces, no double spaces
-// Example: "Lunch at cafe" ✅  "  Lunch  " ❌
+// Example: "Lunch chez bosco" ✅  "  Lunch  " ❌
 export const REGEX_PATTERNS = {
     description: /^\S(?:.*\S)?$/,
     
     // 2. Amount: Numbers with optional 2 decimal places
-    // Examples: "12" ✅ "12.50" ✅ "0.99" ✅ "-5" ❌ "12.5" ❌
+    // Examples: "12" ✅ "10.50" ✅ "0.99" ✅ "-5" ❌ "12.5" ❌
     amount: /^(0|[1-9]\d*)(\.\d{2})?$/,
     
     // 3. Date: YYYY-MM-DD format
@@ -21,7 +20,7 @@ export const REGEX_PATTERNS = {
     date: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,
     
     // 4. Category: Letters, spaces, hyphens only
-    // Examples: "Food" ✅ "Books-Stationery" ✅ "Food123" ❌
+    // Examples: "Lunch" ✅ "Books-Stationery" ✅ "Food123" ❌
     category: /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/,
     
     // 5. ADVANCED: Duplicate word detector (back-reference)
@@ -29,7 +28,7 @@ export const REGEX_PATTERNS = {
     // Example: "lunch lunch" will be caught!
     duplicateWord: /\b(\w+)\s+\1\b/i,
     
-    // 6. ADVANCED: Find amounts with cents (for search)
+    // 6. ADVANCED: Find amounts with cents
     // Example: matches "12.50" but not "12"
     hasCents: /\.\d{2}\b/,
     
