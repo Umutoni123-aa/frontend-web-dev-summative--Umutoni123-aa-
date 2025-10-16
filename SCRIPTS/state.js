@@ -1,12 +1,12 @@
 /**
- * state.js - Manages the application state (the "brain" of our app!)
+ * state.js - Manages the application state (the "brain" of the app!)
  * This keeps track of all transactions and settings
  */
 
 import { loadTransactions, saveTransactions, loadSettings, saveSettings } from './storage.js';
 
 /**
- * Application State - This is where we store everything!
+ * Application State - This is where we keep everything!
  */
 let state = {
     transactions: [],
@@ -15,7 +15,7 @@ let state = {
         currencies: {
             USD: 1.00,
             EUR: 0.85,
-            RWF: 1300
+            RWF: 1350
         }
     },
     currentEditId: null, // Which transaction is being edited (if any)
@@ -27,7 +27,7 @@ let state = {
 };
 
 /**
- * Initialize the state - Load data from storage
+ * Initialize the state
  */
 export function initializeState() {
     state.transactions = loadTransactions();
@@ -61,7 +61,7 @@ export function addTransaction(transactionData) {
     // Generate a unique ID
     const id = generateId();
     
-    // Get current timestamp
+    // Get timestamp
     const now = new Date().toISOString();
     
     // Create the transaction object
@@ -86,7 +86,7 @@ export function addTransaction(transactionData) {
 }
 
 /**
- * Update an existing transaction
+ * Update transaction
  * @param {string} id - Transaction ID
  * @param {Object} updates - Fields to update
  * @returns {Object|null} Updated transaction or null if not found
@@ -125,7 +125,7 @@ export function deleteTransaction(id) {
     const index = state.transactions.findIndex(t => t.id === id);
     
     if (index === -1) {
-        console.error('Transaction not found:', id);
+        console.error('Transaction not found, try again!:', id);
         return false;
     }
     
@@ -135,7 +135,7 @@ export function deleteTransaction(id) {
     // Save to localStorage
     saveTransactions(state.transactions);
     
-    console.log('Transaction deleted:', id);
+    console.log('Transaction deleted successfully!:', id);
     return true;
 }
 
@@ -144,7 +144,7 @@ export function deleteTransaction(id) {
  * @returns {Object} Settings object
  */
 export function getSettings() {
-    return { ...state.settings }; // Return a copy
+    return { ...state.settings }; // Return
 }
 
 /**
@@ -201,7 +201,7 @@ export function getFilters() {
 }
 
 /**
- * Calculate statistics from transactions
+ * Calculating
  * @returns {Object} Statistics object
  */
 export function calculateStats() {
