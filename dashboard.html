@@ -10,7 +10,7 @@
     <!-- Skip to main content link for accessibility -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
     
-    <!-- Header with navigation -->
+    <!-- Header -->
     <header>
         <h1>💰 Student Finance Tracker</h1>
         <nav>
@@ -24,23 +24,19 @@
         </nav>
     </header>
 
-    <!-- Main content area -->
+    <!-- Main menu -->
     <main id="main-content">
         <section>
-            <h2>📊 Financial Overview</h2>
-            
-            <!-- Stats Cards Grid -->
+            <h2> Financial Overview</h2>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon">📝</div>
                     <div class="stat-info">
-                        <p class="stat-label">Total Transactions</p>
+                        <p class="stat-label">Total Transactions made</p>
                         <p class="stat-value" id="total-transactions">0</p>
                     </div>
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon">💵</div>
                     <div class="stat-info">
                         <p class="stat-label">Total Spent</p>
                         <p class="stat-value" id="total-spent">$0.00</p>
@@ -48,7 +44,6 @@
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
                     <div class="stat-info">
                         <p class="stat-label">Top Category</p>
                         <p class="stat-value" id="top-category">None</p>
@@ -56,10 +51,9 @@
                 </div>
 
                 <div class="stat-card">
-                    <div class="stat-icon">📅</div>
                     <div class="stat-info">
                         <p class="stat-label">Last 7 Days</p>
-                        <p class="stat-value" id="last-seven-days">$0.00</p>
+                        <p class="stat-value" id="weekly-overview">$0.00</p>
                     </div>
                 </div>
             </div>
@@ -80,21 +74,21 @@
                     </div>
                 </div>
                 
-                <!-- Progress Bar -->
+                <!-- Task progress -->
                 <div class="progress-bar-container">
                     <div class="progress-bar" id="budget-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                         <span class="progress-text">0%</span>
                     </div>
                 </div>
                 
-                <!-- Live Alert Region for Budget Status -->
+                <!-- Spending Alert Area -->
                 <div id="budget-alert" class="budget-alert" role="status" aria-live="polite" aria-atomic="true">
-                    <p>You're doing great! Keep tracking your expenses.</p>
+                    <p>Great job! Stay on top of your expenses.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Category Breakdown -->
+        <!-- Expense Overview -->
         <section>
             <h2>📈 Spending by Category</h2>
             <div id="category-breakdown" class="category-list">

@@ -509,7 +509,6 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
 /* Desktop for (1024px and up) */
 @media (min-width: 1024px) {
     header {

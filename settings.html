@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Student Finance Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header with navigation -->
+    <header>
+        <h1>💰 Student Finance Tracker</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content area -->
+    <main id="main-content">
+        <!-- Budget Settings -->
+        <section>
+            <h2>🎯 Budget Settings</h2>
+            <form id="budget-form" class="settings-form">
+                <div class="form-group">
+                    <label for="budget-cap">Monthly Budget Cap ($) *</label>
+                    <input 
+                        type="text" 
+                        id="budget-cap" 
+                        name="budgetCap" 
+                        placeholder="e.g., 500.00"
+                        value="500.00"
+                        aria-describedby="budget-cap-help"
+                    >
+                    <small id="budget-cap-help" class="help-text">
+                        Set your maximum monthly spending limit. You'll get alerts when you're close.
+                    </small>
+                    <span id="budget-cap-error" class="error-message" role="alert"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Budget</button>
+                <div id="budget-status" role="status" aria-live="polite" class="form-status"></div>
+            </form>
+        </section>
+
+        <!-- Currency Settings -->
+        <section>
+            <h2>💱 Currency Settings</h2>
+            <p class="section-description">
+                Set up exchange rates for different currencies. The base currency is USD ($).
+            </p>
+
+            <form id="currency-form" class="settings-form">
+                <div class="currency-list">
+                    <!-- USD (Base Currency) -->
+                    <div class="currency-item">
+                        <div class="currency-info">
+                            <strong>USD (Base Currency)</strong>
+                            <p>United States Dollar</p>
+                        </div>
+                        <div class="currency-rate">
+                            <span class="rate-value">1.00</span>
+                        </div>
+                    </div>
+
+                    <!-- EUR -->
+                    <div class="currency-item">
+                        <div class="currency-info">
+                            <strong>EUR</strong>
+                            <p>Euro</p>
+                        </div>
+                        <div class="currency-rate">
+                            <label for="eur-rate" class="sr-only">EUR exchange rate</label>
+                            <input 
+                                type="text" 
+                                id="eur-rate" 
+                                name="eurRate" 
+                                class="rate-input"
+                                placeholder="0.85"
+                                value="0.85"
+                            >
+                            <span class="rate-label">EUR per 1 USD</span>
+                        </div>
+                    </div>
+
+                    <!-- RWF (Rwandan Franc) -->
+                    <div class="currency-item">
+                        <div class="currency-info">
+                            <strong>RWF</strong>
+                            <p>Rwandan Franc</p>
+                        </div>
+                        <div class="currency-rate">
+                            <label for="rwf-rate" class="sr-only">RWF exchange rate</label>
+                            <input 
+                                type="text" 
+                                id="rwf-rate" 
+                                name="rwfRate" 
+                                class="rate-input"
+                                placeholder="1300"
+                                value="1300"
+                            >
+                            <span class="rate-label">RWF per 1 USD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Rates</button>
+                <div id="currency-status" role="status" aria-live="polite" class="form-status"></div>
+            </form>
+        </section>
+
+        <!-- Data Management -->
+        <section>
+            <h2>💾 Data Management</h2>
+            
+            <div class="data-actions">
+                <!-- Export Data -->
+                <div class="data-card">
+                    <h3>📤 Export Data</h3>
+                    <p>Download all your transactions as a JSON file for backup.</p>
+                    <button class="btn btn-secondary" id="export-btn">
+                        Export to JSON
+                    </button>
+                </div>
+
+                <!-- Import Data -->
+                <div class="data-card">
+                    <h3>📥 Import Data</h3>
+                    <p>Upload a JSON file to restore your transactions.</p>
+                    <input 
+                        type="file" 
+                        id="import-file" 
+                        accept=".json"
+                        class="file-input"
+                        aria-label="Choose JSON file to import"
+                    >
+                    <button class="btn btn-secondary" id="import-btn">
+                        Import from JSON
+                    </button>
+                    <div id="import-status" role="status" aria-live="polite" class="form-status"></div>
+                </div>
+
+                <!-- Clear All Data -->
+                <div class="data-card danger-card">
+                    <h3>🗑️ Clear All Data</h3>
+                    <p><strong>Warning:</strong> This will permanently delete all your transactions!</p>
+                    <button class="btn btn-danger" id="clear-data-btn">
+                        Clear All Data
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Management -->
+        <section>
+            <h2>🏷️ Category Management</h2>
+            <p class="section-description">
+                Current categories: Food, Books, Transport, Entertainment, Fees, Other
+            </p>
+            <div class="category-pills">
+                <span class="pill">Food</span>
+                <span class="pill">Books</span>
+                <span class="pill">Transport</span>
+                <span class="pill">Entertainment</span>
+                <span class="pill">Fees</span>
+                <span class="pill">Other</span>
+            </div>
+            <p class="help-text">
+                <em>Note: Custom category editing will be available in a future version.</em>
+            </p>
+        </section>
+    </main>
+
+    <!-- Confirmation Modal for Clear Data -->
+    <div id="clear-modal" class="modal" role="dialog" aria-labelledby="clear-modal-title" aria-modal="true" style="display: none;">
+        <div class="modal-content">
+            <h3 id="clear-modal-title">⚠️ Confirm Clear All Data</h3>
+            <p>Are you absolutely sure you want to delete <strong>ALL</strong> your transactions?</p>
+            <p><strong>This action cannot be undone!</strong></p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="confirm-clear">Yes, Delete Everything</button>
+                <button class="btn btn-secondary" id="cancel-clear">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Student Finance Tracker. Built by Umutoni Nada</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script type="module" src="scripts/storage.js"></script>
+    <script type="module" src="scripts/state.js"></script>
+    <script type="module" src="scripts/ui.js"></script>
+</body>
+</html>

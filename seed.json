@@ -1,0 +1,12 @@
+[
+  {"id":"txn_001","description":"Breakfast chez Bosco","amount":10.5,"category":"Food","date":"2025-08-25","createdAt":"2025-08-25T12:00:00Z","updatedAt":"2025-08-25T12:00:00Z"},
+  {"id":"txn_002","description":"earrings","amount":20.99,"category":"Accessories","date":"2025-05-21","createdAt":"2025-05-21T09:20:00Z","updatedAt":"2025-05-21T09:20:00Z"},
+  {"id":"txn_003","description":"sofa","amount":45,"category":"Furniture","date":"2025-08-31","createdAt":"2025-08-31T08:00:00Z","updatedAt":"2025-08-31T08:00:00Z"},
+  {"id":"txn_004","description":"hangout with friends","amount":8.75,"category":"Entertainment","date":"2025-02-28","createdAt":"2025-02-28T18:00:00Z","updatedAt":"2025-02-28T18:00:00Z"},
+  {"id":"txn_005","description":" Hair ","amount":0.5,"category":"Personal Care","date":"2025-03-10","createdAt":"2025-03-10T10:00:00Z","updatedAt":"2025-03-10T10:00:00Z"},
+  {"id":"txn_006","description":"plants","amount":3500,"category":"Home & Garden","date":"2025-02-22","createdAt":"2025-08-01T07:30:00Z","updatedAt":"2025-08-01T07:30:00Z"},
+  {"id":"txn_007","description":"shoes","amount":0.05,"category":"Footwear","date":"2025-11-01","createdAt":"2025-11-01T12:00:00Z","updatedAt":"2025-11-01T12:00:00Z"},
+  {"id":"txn_008","description":"Textbook - advanced topics","amount":40.5,"category":"Books","date":"2025-09-10","createdAt":"2025-09-10T14:00:00Z","updatedAt":"2025-09-10T14:00:00Z"},
+  {"id":"txn_009","description":"Taxi move","amount":10.25,"category":"Transport","date":"2025-10-07","createdAt":"2025-10-07T22:00:00Z","updatedAt":"2025-10-07T22:00:00Z"},
+  {"id":"txn_010","description":"Breakfast chez Bosco","amount":90.0,"category":"Food","date":"2025-12-03","createdAt":"2025-12-03T09:00:00Z","updatedAt":"2025-12-03T09:00:00Z"}
+]
