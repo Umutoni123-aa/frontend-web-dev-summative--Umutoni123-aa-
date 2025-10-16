@@ -3,15 +3,14 @@
 Student Finance Tracker
 The Student Finance Tracker. A simple web application designed for students in need of a straightforward tool to manage their finances effectively. Whether you're tracking daily expenses, managing your budget, or analyzing your spending, this tool makes it easy to find what you need and take control of your financial life.
 
-## Features Implemented (Matching Assignment Requirements)
+## Features Implemented
 
 ### 1. **Pages/Sections**
 
-- **About Page**: Contains project description, your name (Umutoni Nada), and contact info
+- **About Page**: Contains project description, name (Umutoni Nada), and contact info
 - **Dashboard**: Stats showing total spent, transaction count, top category, budget progress
 - **Transactions Table** (Desktop): Sortable table with edit/delete actions
 - **Transactions Cards** (Mobile): Responsive card layout for mobile devices
-- **Add/Edit Form**: Form with regex validation
 - **Settings**: Budget and currency exchange rates
 
 Getting Started
@@ -46,7 +45,7 @@ Settings
 Customize the app to your preferences:
 
 Change currency (USD, EUR, GBP)
-Set a monthly budget
+Set a budget
 Manage categories
 Import/Export your data
 Data Privacy
@@ -60,6 +59,33 @@ Enter/Space: Activate buttons and links
 Escape: Close modals and dialogs
 Arrow keys: Navigate between form fields and table rows
 Regular Expressions Used
+
+## 📁 Project Structure
+
+```
+student-finance-tracker/
+├── index.html              * Homepage
+├── about.html              * About page with contact info
+├── dashboard.html          * budget dashboard
+├── transactions.html       * Main transactions page
+├── settings.html           * Settings and data management
+├── tests.html              * Regex testing page
+├── seed.json               * Sample data
+├── README.md               * This file
+│
+├── styles/
+│   └── main.css            * All styles (responsive, accessible)
+│
+├── scripts/
+│   ├── storage.js          * LocalStorage operations
+│   ├── state.js            * Application state management
+│   ├── validators.js       * Regex validation functions
+│   ├── search.js           * Search and sort logic
+│   └── ui.js               * DOM manipulation and event handling
+│
+└── assets/
+    └── wireframes.png      * Initial design sketches
+```
 
 Acknowledgments
 Built with vanilla JavaScript, HTML5, and CSS3

@@ -1,5 +1,7 @@
 /**
  * storage.js - Handles saving and loading data from localStorage
+ * This is like a filing cabinet that remembers your transactions!
+ */
 
 // Keys for storing different types of data
 const STORAGE_KEYS = {
@@ -137,7 +139,7 @@ export function importFromJSON(jsonString) {
         
         return data;
     } catch (error) {
-        console.error('Error importing JSON:', error);
+        console.error('Error importing from JSON:', error);
         return null;
     }
 }

@@ -1,88 +1,299 @@
-// scripts/state.js
-import * as storage from './storage.js';
-import { validateRecord } from './validators.js';
+/**
+ * state.js - Manages the application state (the "brain" of our app!)
+ * This keeps track of all transactions and settings
+ */
 
-function nowIso(){ return new Date().toISOString(); }
+import { loadTransactions, saveTransactions, loadSettings, saveSettings } from './storage.js';
 
-let records = storage.load() || [];
+/**
+ * Application State - This is where we store everything!
+ */
+let state = {
+    transactions: [],
+    settings: {
+        budgetCap: 500.00,
+        currencies: {
+            USD: 1.00,
+            EUR: 0.85,
+            RWF: 1300
+        }
+    },
+    currentEditId: null, // Which transaction is being edited (if any)
+    filters: {
+        searchPattern: '',
+        sortBy: 'date-desc',
+        caseSensitive: false
+    }
+};
 
-// If empty, then load seed.json automatically.
-export function initWithSeed(seedArray = []) {
-  if (records.length === 0 && Array.isArray(seedArray) && seedArray.length > 0) {
-    records = seedArray.map(r => ({ ...r }));
-    storage.save(records);
-  } else {
-    records = storage.load() || [];
-  }
+/**
+ * Initialize the state - Load data from storage
+ */
+export function initializeState() {
+    state.transactions = loadTransactions();
+    state.settings = loadSettings();
+    console.log('State initialized:', state);
 }
 
-export function all() {
-  return [...records]; // keep shallow copy
+/**
+ * Get all transactions
+ * @returns {Array} Array of all transactions
+ */
+export function getTransactions() {
+    return [...state.transactions]; // Return a copy
 }
 
-export function findById(id) {
-  return records.find(r => String(r.id) === String(id));
+/**
+ * Get a single transaction by ID
+ * @param {string} id - Transaction ID
+ * @returns {Object|null} Transaction object or null
+ */
+export function getTransactionById(id) {
+    return state.transactions.find(t => t.id === id) || null;
 }
 
-export function create(data) {
-  const prepared = {
-    id: `txn_${Date.now()}${Math.floor(Math.random()*1000)}`,
-    description: String(data.description || '').trim().replace(/\s{2,}/g, ' '),
-    amount: Number(String(data.amount).trim()) || 0,
-    category: String(data.category || 'Other').trim(),
-    date: String(data.date || new Date().toISOString().substring(0,10)),
-    createdAt: nowIso(),
-    updatedAt: nowIso()
-  };
-
-  const validation = validateRecord(prepared);
-  if (!validation.ok) return { ok: false, errors: validation.errors };
-
-  records.push(prepared);
-  storage.save(records);
-  return { ok: true, record: prepared };
+/**
+ * Add a new transaction
+ * @param {Object} transactionData - {description, amount, category, date}
+ * @returns {Object} The newly created transaction
+ */
+export function addTransaction(transactionData) {
+    // Generate a unique ID
+    const id = generateId();
+    
+    // Get current timestamp
+    const now = new Date().toISOString();
+    
+    // Create the transaction object
+    const transaction = {
+        id: id,
+        description: transactionData.description.trim(),
+        amount: parseFloat(transactionData.amount),
+        category: transactionData.category,
+        date: transactionData.date,
+        createdAt: now,
+        updatedAt: now
+    };
+    
+    // Add to state
+    state.transactions.push(transaction);
+    
+    // Save to localStorage
+    saveTransactions(state.transactions);
+    
+    console.log('Transaction added:', transaction);
+    return transaction;
 }
 
-export function update(id, data) {
-  const idx = records.findIndex(r => String(r.id) === String(id));
-  if (idx === -1) return { ok: false, error: 'not_found' };
-
-  const merged = { ...records[idx], ...data, updatedAt: nowIso() };
-
-  // Clean description
-  merged.description = String(merged.description || '').trim().replace(/\s{2,}/g, ' ');
-
-  const validation = validateRecord(merged);
-  if (!validation.ok) return { ok: false, errors: validation.errors };
-
-  records[idx] = merged;
-  storage.save(records);
-  return { ok: true, record: merged };
+/**
+ * Update an existing transaction
+ * @param {string} id - Transaction ID
+ * @param {Object} updates - Fields to update
+ * @returns {Object|null} Updated transaction or null if not found
+ */
+export function updateTransaction(id, updates) {
+    const index = state.transactions.findIndex(t => t.id === id);
+    
+    if (index === -1) {
+        console.error('Transaction not found:', id);
+        return null;
+    }
+    
+    // Update the transaction
+    state.transactions[index] = {
+        ...state.transactions[index],
+        description: updates.description.trim(),
+        amount: parseFloat(updates.amount),
+        category: updates.category,
+        date: updates.date,
+        updatedAt: new Date().toISOString()
+    };
+    
+    // Save to localStorage
+    saveTransactions(state.transactions);
+    
+    console.log('Transaction updated:', state.transactions[index]);
+    return state.transactions[index];
 }
 
-export function remove(id) {
-  const before = records.length;
-  records = records.filter(r => String(r.id) !== String(id));
-  storage.save(records);
-  return { ok: records.length < before };
+/**
+ * Delete a transaction
+ * @param {string} id - Transaction ID
+ * @returns {boolean} True if deleted, false if not found
+ */
+export function deleteTransaction(id) {
+    const index = state.transactions.findIndex(t => t.id === id);
+    
+    if (index === -1) {
+        console.error('Transaction not found:', id);
+        return false;
+    }
+    
+    // Remove from array
+    state.transactions.splice(index, 1);
+    
+    // Save to localStorage
+    saveTransactions(state.transactions);
+    
+    console.log('Transaction deleted:', id);
+    return true;
 }
 
-export function replaceAll(newRecords) {
-  // expect validated array
-  records = Array.isArray(newRecords) ? newRecords : [];
-  storage.save(records);
+/**
+ * Get settings
+ * @returns {Object} Settings object
+ */
+export function getSettings() {
+    return { ...state.settings }; // Return a copy
 }
 
-export function appendMany(newRecords) {
-  records = records.concat(newRecords);
-  storage.save(records);
+/**
+ * Update settings
+ * @param {Object} newSettings - New settings to merge
+ * @returns {Object} Updated settings
+ */
+export function updateSettings(newSettings) {
+    state.settings = {
+        ...state.settings,
+        ...newSettings
+    };
+    
+    // Save to localStorage
+    saveSettings(state.settings);
+    
+    console.log('Settings updated:', state.settings);
+    return state.settings;
 }
 
-export function clear() {
-  records = [];
-  storage.clearAll();
+/**
+ * Set current edit ID (when editing a transaction)
+ * @param {string|null} id - Transaction ID or null to clear
+ */
+export function setCurrentEditId(id) {
+    state.currentEditId = id;
 }
 
-export function exportJson() {
-  return JSON.stringify(records, null, 2);
+/**
+ * Get current edit ID
+ * @returns {string|null} Current edit ID
+ */
+export function getCurrentEditId() {
+    return state.currentEditId;
 }
+
+/**
+ * Update filters (search pattern, sort order)
+ * @param {Object} filters - Filter updates
+ */
+export function updateFilters(filters) {
+    state.filters = {
+        ...state.filters,
+        ...filters
+    };
+}
+
+/**
+ * Get current filters
+ * @returns {Object} Current filters
+ */
+export function getFilters() {
+    return { ...state.filters };
+}
+
+/**
+ * Calculate statistics from transactions
+ * @returns {Object} Statistics object
+ */
+export function calculateStats() {
+    const transactions = state.transactions;
+    
+    // Total transactions
+    const totalCount = transactions.length;
+    
+    // Total spent
+    const totalSpent = transactions.reduce((sum, t) => sum + t.amount, 0);
+    
+    // Category breakdown
+    const categoryTotals = {};
+    transactions.forEach(t => {
+        if (!categoryTotals[t.category]) {
+            categoryTotals[t.category] = 0;
+        }
+        categoryTotals[t.category] += t.amount;
+    });
+    
+    // Find top category
+    let topCategory = 'None';
+    let maxAmount = 0;
+    for (const [category, amount] of Object.entries(categoryTotals)) {
+        if (amount > maxAmount) {
+            maxAmount = amount;
+            topCategory = category;
+        }
+    }
+    
+    // Last 7 days spending
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    
+    const last7Days = transactions
+        .filter(t => new Date(t.date) >= sevenDaysAgo)
+        .reduce((sum, t) => sum + t.amount, 0);
+    
+    // Budget info
+    const budgetCap = state.settings.budgetCap;
+    const remaining = budgetCap - totalSpent;
+    const percentUsed = totalSpent > 0 ? (totalSpent / budgetCap) * 100 : 0;
+    
+    return {
+        totalCount,
+        totalSpent,
+        categoryTotals,
+        topCategory,
+        last7Days,
+        budget: {
+            cap: budgetCap,
+            remaining,
+            percentUsed: Math.min(percentUsed, 100) // Cap at 100%
+        }
+    };
+}
+
+/**
+ * Generate a unique ID for transactions
+ * @returns {string} Unique ID like "txn_1634567890123"
+ */
+function generateId() {
+    return `txn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+/**
+ * Import transactions (replace all existing)
+ * @param {Array} transactions - Array of transactions to import
+ * @returns {boolean} Success status
+ */
+export function importTransactions(transactions) {
+    try {
+        state.transactions = transactions;
+        saveTransactions(state.transactions);
+        console.log('Transactions imported:', transactions.length);
+        return true;
+    } catch (error) {
+        console.error('Error importing transactions:', error);
+        return false;
+    }
+}
+
+/**
+ * Clear all transactions
+ * @returns {boolean} Success status
+ */
+export function clearAllTransactions() {
+    state.transactions = [];
+    saveTransactions(state.transactions);
+    console.log('All transactions cleared');
+    return true;
+}
+
+// Initialize state when module loads
+initializeState();
